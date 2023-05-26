@@ -48,6 +48,9 @@ def get_latest_champions() -> list[str]:
 
 
 # Common (to me) Champion Aliases
+# "Why aliases if fuzzy matching?"
+# League has many colloquial champ names and abbreviations,
+# most of which don't fuzzy match to their respective champ name
 champ_aliases = {
     "ww": "warwick",
     "vik": "viktor",
