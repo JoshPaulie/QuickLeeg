@@ -65,18 +65,19 @@ def validate_lane(lane: str):
         pass
 
     lane = lane.lower()
-    if lane in ["t", "top"]:
-        return "top"
-    if lane in ["j", "jg", "jungle"]:
-        return "jungle"
-    if lane in ["m", "mid", "middle"]:
-        return "middle"
-    if lane in ["a", "adc", "ad", "bot", "bottom"]:
-        return "adc"
-    if lane in ["s", "sup", "supp", "support"]:
-        return "support"
-    if lane in ["aram"]:
-        return lane
+    match lane:
+        case "t" | "top":
+            return "top"
+        case "j" | "jg" | "jungle":
+            return "jungle"
+        case "m" | "mid" | "middle":
+            return "middle"
+        case "a" | "adc" | "ad" | "bot" | "bottom":
+            return "adc"
+        case "s" | "sup" | "supp" | "support":
+            return "support"
+        case "aram":
+            return lane
     raise UnknownLane(f"Unknown role/lane: {lane}. Must be top, jungle, middle, adc, support, or aram")
 
 
@@ -85,20 +86,24 @@ def validate_rank(rank: str):
         pass
 
     rank = rank.lower()
-    if rank in "i iron".split():
-        return "iron"  # lmao
-    if rank in "b br bronze".split():
-        return "bronze"
-    if rank in "s sil silver".split():
-        return "silver"
-    if rank in "g gold".split():
-        return "gold"
-    if rank in "p plat platinum".split():
-        return None  # This is the default stats rank
-    if rank in "d diamond".split():
-        return "diamond"
-    if rank in "m master".split():
-        return "master"
+    match rank:
+        case "i" | "iron":
+            # lol, imagine
+            return "iron"
+        case "b" | "br" | "bronze":
+            return "bronze"
+        case "s" | "sil" | "silver":
+            return "silver"
+        case "g" | "gold":
+            return "gold"
+        case "p" | "plat" | "platinum":
+            # Plat is the default rank and can't be set, so by returning None
+            # a rank won't be appended to the link
+            return None
+        case "d" | "diamond":
+            return "diamond"
+        case "m" | "master":
+            return "master"
     raise UnknownRank(f"Unknown rank: {rank}. Must be Iron - Master")
 
 
