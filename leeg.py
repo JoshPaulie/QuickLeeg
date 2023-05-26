@@ -13,57 +13,76 @@ DESCRIPTION = "Crude cli to quickly get champion stats for League, from 'League 
 
 # Data fetchers
 def get_latest_patch() -> str:
+    """Pull the latest LoL SemVar patch, needed for get_latest_champions()"""
     all_patches_url = "http://ddragon.leagueoflegends.com/api/versions.json"
     try:
         response = requests.get(all_patches_url)
         response.raise_for_status()
-        all_patches = response.json()
-        return all_patches[0]
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as e:
         print(f"There was an error getting the latest patch: {e}")
         sys.exit()
+    else:
+        all_patches = response.json()
+        return all_patches[0]
 
 
 def get_latest_champions() -> list[str]:
     latest_patch = get_latest_patch()
     latest_champions_url = f"http://ddragon.leagueoflegends.com/cdn/{latest_patch}/data/en_US/champion.json"
+
     try:
+        start_time = time.perf_counter()
         response = requests.get(latest_champions_url)
         response.raise_for_status()
-        all_champions = response.json()
-        champion_names = [champ for champ in all_champions["data"]]
-        return champion_names
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as e:
         print(f"There was an error getting the latest champions: {e}")
         sys.exit()
+    else:
+        all_champions = response.json()
+        champion_names = [champ for champ in all_champions["data"]]
+
+        end_time = time.perf_counter()
+        elapsed_time = end_time - start_time
+        rich.print(f"Latest champions downloaded... ([green]{elapsed_time:.3f}s[/])")
+        return champion_names
 
 
-# Input validators
+# Common (to me) Champion Aliases
 champ_aliases = {
     "ww": "warwick",
     "vik": "viktor",
+    "yi": "masteryi",
+    "tf": "twistedfate",
+    "rg": "renata",
 }
 
 
+# Input validators
 def validate_champ(champ: str):
     """Validates champion name by either: matching an alias and returning the predefined name OR fuzzy match against the latest champs"""
     champ = champ.lower()
+
     if champ in champ_aliases.keys():
-        return champ_aliases[champ]
+        matched_alias = champ_aliases[champ]
+        rich.print(f"Alias matched [green]{champ}[/] -> [blue]{matched_alias}[/]")
+        return matched_alias
 
-    start_time = time.perf_counter()
-    fuzzy_champ: str = process.extractOne(champ, get_latest_champions())[0]  # type: ignore 🤮
-    end_time = time.perf_counter()
+    latest_champs = get_latest_champions()
+    if champ in [champ.lower() for champ in latest_champs]:
+        return champ
 
-    elapsed_time = f"{end_time - start_time:.3f}"
-    rich.print(f"Fuzzy matched [red]{champ}[/] -> [red]{fuzzy_champ.lower()}[/] ([green]{elapsed_time}s[/])")
-    return fuzzy_champ.lower()
+    # todo raise expection if a decent fuzzy match can't be found?
+    fuzzy_champ: str = process.extractOne(champ, latest_champs)[0]  # type: ignore 🤮
+    fuzzy_champ = fuzzy_champ.lower()
+    rich.print(f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/]")
+    return fuzzy_champ
+
+
+class UnknownLane(Exception):
+    pass
 
 
 def validate_lane(lane: str):
-    class UnknownLane(Exception):
-        pass
-
     lane = lane.lower()
     match lane:
         case "t" | "top":
@@ -78,13 +97,16 @@ def validate_lane(lane: str):
             return "support"
         case "aram":
             return lane
-    raise UnknownLane(f"Unknown role/lane: {lane}. Must be top, jungle, middle, adc, support, or aram")
+    raise UnknownLane(
+        f"Unknown role/lane: [red]{lane}[/]. Must be top, jungle, middle, adc, support, or aram"
+    )
+
+
+class UnknownRank(Exception):
+    pass
 
 
 def validate_rank(rank: str):
-    class UnknownRank(Exception):
-        pass
-
     rank = rank.lower()
     match rank:
         case "i" | "iron":
@@ -104,7 +126,7 @@ def validate_rank(rank: str):
             return "diamond"
         case "m" | "master":
             return "master"
-    raise UnknownRank(f"Unknown rank: {rank}. Must be Iron - Master")
+    raise UnknownRank(f"Unknown rank: [red]{rank}[/]. Must be Iron - Master")
 
 
 # Main
@@ -115,7 +137,11 @@ def main():
     parser.add_argument("lane", type=validate_lane, help="Lane name, can also specify 'ARAM' here")
     parser.add_argument("-r", "--rank", type=validate_rank, help="Specify rank")
 
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except (UnknownLane, UnknownRank) as e:
+        rich.print(f"Error occurred: {e}")
+        sys.exit()
 
     champ = args.champ
     lane = args.lane
@@ -134,7 +160,7 @@ def main():
     end_time = time.perf_counter()
 
     elapsed_time = f"{end_time - start_time:.3f}"
-    rich.print(f"Build loaded, glhf 💪 ([green]{elapsed_time}s[/])")
+    rich.print(f"Build opened in your browser, glhf 💪 ([green]{elapsed_time}s[/])")
 
 
 if __name__ == "__main__":
