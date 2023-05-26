@@ -4,8 +4,11 @@ Crude cli to quickly get builds for League of Legends champions from '[League of
 Other build sites might be supported in the future
 
 ## Features
-- Fastest way to get your league build (at least from League of Graphs). More info @ [Why?](#why)
-- Common champion nicknames support, with fuzzy finding fallback
+- Fastest way to get your league build from League of Graphs (< 1s! 🔥)
+  - Read more on the [why here](#why)
+- Simply pass your desired champion and lane to the app and your browser will open up, and snap to, your champion's build
+- Common champion nickname support, with fuzzy finding fallback
+- Makes small call to Riot API to make sure champ list is up to date
 
 ## Installation
 ```zsh
