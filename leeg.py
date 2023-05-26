@@ -136,7 +136,7 @@ def main():
     start_time = time.perf_counter()
     parser = argparse.ArgumentParser(description=DESCRIPTION)
     parser.add_argument("champ", type=validate_champ, help="Champion name")
-    parser.add_argument("lane", type=validate_lane, help="Lane name, can also specify 'ARAM' here")
+    parser.add_argument("lane", type=validate_lane, help="Lane name or 'ARAM'")
     parser.add_argument("-r", "--rank", type=validate_rank, help="Specify rank")
 
     try:
