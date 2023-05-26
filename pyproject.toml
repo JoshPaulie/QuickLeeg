@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "QuickLeeg"
+description = "Crude cli to quickly get champion stats for League, from 'League of Graphs' ❤️"
+version = "1.0.0"
+authors = [
+  {email = "bexli.contact@gmail.com"},
+  {name = "JoshPaulie"}
+]
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["League of Graphs", "League", "QuickLeeg"]
+dependencies = [
+    "requests",
+    "thefuzz",
+    "python-Levenshtein",
+    "rich",
+]
+
+[project.scripts]
+leeg = "leeg:main"
+
+[project.urls]
+Documentation = "https://github.com/joshpaulie/QuickLeeg#readme"
+Issues = "https://github.com/joshpaulie/QuickLeeg/issues"
+Source = "https://github.com/joshpaulie/QuickLeeg"
+
+[tool.black]
+line-length = 180
+
+[tool.pylint.format]
+max-line-length = 180
