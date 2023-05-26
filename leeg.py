@@ -74,10 +74,9 @@ def validate_champ(champ: str):
     if champ in [champ.lower() for champ in latest_champs]:
         return champ
 
-    # todo raise expection if a decent fuzzy match can't be found?
-    fuzzy_champ: str = process.extractOne(champ, latest_champs)[0]  # type: ignore 🤮
+    fuzzy_champ, fuzzy_match_percent = process.extractOne(champ, latest_champs)  # type: ignore 🤮
     fuzzy_champ = fuzzy_champ.lower()
-    rich.print(f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/]")
+    rich.print(f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/] ({fuzzy_match_percent}% match)")
     return fuzzy_champ
 
 
