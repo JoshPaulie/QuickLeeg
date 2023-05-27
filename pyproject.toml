@@ -11,8 +11,9 @@ authors = [
   {name = "JoshPaulie"}
 ]
 readme = "README.md"
-keywords = ["League of Graphs", "League", "QuickLeeg"]
 requires-python = ">=3.10"
+keywords = ["League of Graphs", "League of Legends", "QuickLeeg"]
+
 dependencies = [
     "requests",
     "thefuzz",
