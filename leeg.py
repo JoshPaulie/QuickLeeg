@@ -8,7 +8,7 @@ import requests
 import rich
 from thefuzz import process
 
-DESCRIPTION = "Crude cli to quickly get champion stats for League, from 'League of Graphs' ❤️"
+from __about__ import description, version
 
 
 # Data fetchers
@@ -134,10 +134,11 @@ def validate_rank(rank: str):
 # Main
 def main():
     start_time = time.perf_counter()
-    parser = argparse.ArgumentParser(description=DESCRIPTION)
+    parser = argparse.ArgumentParser(prog="leeg", description=description)
     parser.add_argument("champ", type=validate_champ, help="Champion name")
     parser.add_argument("lane", type=validate_lane, help="Lane name or 'ARAM'")
     parser.add_argument("-r", "--rank", type=validate_rank, help="Specify rank")
+    parser.add_argument("-v", "--version", action="version", version=f"leeg v{version}")
 
     try:
         args = parser.parse_args()
