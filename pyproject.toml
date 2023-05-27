@@ -11,8 +11,8 @@ authors = [
   {name = "JoshPaulie"}
 ]
 readme = "README.md"
-requires-python = ">=3.7"
 keywords = ["League of Graphs", "League", "QuickLeeg"]
+requires-python = ">=3.10"
 dependencies = [
     "requests",
     "thefuzz",
