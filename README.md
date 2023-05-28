@@ -1,10 +1,9 @@
 # QuickLeeg
-Crude cli to quickly get builds for League of Legends champions from [League of Graphs](https://www.leagueofgraphs.com/) ❤️
+Crude cli to quickly get champion stats for League, from [League of Graphs](https://www.leagueofgraphs.com/) ❤️
 
 ## Features
 - Fastest way to get your league build from League of Graphs (< 1s! 🔥)
-  - Read more on the [why here](#why)
-- Simply pass your desired champion and lane to the app. Your browser will open and snap to your champion's build
+- Simply pass your desired champion and lane to the script. Your browser will open and snap to your champion's build
 - Common champion nicknames supported, with fuzzy matching fallback
 
 ## Installation & Upgrading
@@ -25,7 +24,7 @@ leeg aatrox top --rank gold
 leeg fizz aram
 ```
 
-## Why?
+## Why does this script exist?
 League of Graphs is easily the superior league build site. Despite this, getting to your favorite champion's stats is one too many clicks for me. You have to
 1) Navigate to League of Graphs
 2) Click search box
@@ -33,4 +32,12 @@ League of Graphs is easily the superior league build site. Despite this, getting
 4) Specify lane
 5) Specify rank
 
-This script litreally just makes this one step
+This script simply does this in one step. 
+
+---
+
+### Disclaimer
+This script/package & author have nothing to do with League of Graphs.
+I'm just a lazy-bones and like to save steps on frequently repeated tasks
+
+But I am interested in making an official **League of Graphs** TUI app if you're interested, Trebonius 🤓
