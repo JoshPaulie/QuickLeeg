@@ -7,13 +7,19 @@ Crude cli to quickly get builds for League of Legends champions from [League of 
 - Simply pass your desired champion and lane to the app. Your browser will open and snap to your champion's build
 - Common champion nicknames supported, with fuzzy matching fallback
 
-## Installation
-```zsh
-pipx install [TBD]
+## Installation & Upgrading
+> ⭐ Star the repo if you're interested in me publishing QuickLeeg to PyPi
+
+```console
+pipx install git+https://github.com/JoshPaulie/QuickLeeg.git
+```
+
+```console
+pipx upgrade QuickLeeg
 ```
 
 ## Usage
-```zsh
+```console
 leeg [-h] [-r RANK] champ lane
 leeg aatrox top --rank gold
 leeg fizz aram
