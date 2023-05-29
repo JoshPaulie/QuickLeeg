@@ -156,7 +156,7 @@ def main():
 
     log_link += "#mainContent"
 
-    rich.print(f"Opening your [blue]{champ}[/] [green]{lane}[/] build...")
+    rich.print(f"Opening your [green]{champ}[/] [blue]{lane}[/] build...")
     rich.print(f"Link: [yellow]{log_link}[/]")
     webbrowser.open(log_link)
     end_time = time.perf_counter()
