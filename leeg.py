@@ -21,9 +21,8 @@ def get_latest_patch() -> str:
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as e:
         print(f"There was an error getting the latest patch: {e}")
         sys.exit()
-    else:
-        all_patches = response.json()
-        return all_patches[0]
+    all_patches = response.json()
+    return all_patches[0]
 
 
 def get_latest_champions() -> list[str]:
@@ -37,14 +36,14 @@ def get_latest_champions() -> list[str]:
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as e:
         print(f"There was an error getting the latest champions: {e}")
         sys.exit()
-    else:
-        all_champions = response.json()
-        champion_names = [champ for champ in all_champions["data"]]
 
-        end_time = time.perf_counter()
-        elapsed_time = end_time - start_time
-        rich.print(f"Latest champions downloaded... ([green]{elapsed_time:.3f}s[/])")
-        return champion_names
+    all_champions = response.json()
+    champion_names = [champ for champ in all_champions["data"]]
+
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
+    rich.print(f"Latest champions downloaded... ([green]{elapsed_time:.3f}s[/])")
+    return champion_names
 
 
 # Common (to me) Champion Aliases
