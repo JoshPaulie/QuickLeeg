@@ -123,6 +123,8 @@ def validate_rank(rank: str):
             # Plat is the default rank and can't be set, so by returning None
             # a rank won't be appended to the link
             return None
+        case "e" | "em" | "emerald":
+            return "emerald"
         case "d" | "diamond":
             return "diamond"
         case "m" | "master":
