@@ -56,6 +56,7 @@ champ_aliases = {
     "yi": "masteryi",
     "tf": "twistedfate",
     "rg": "renata",
+    "j4": "jarvaniv",
 }
 
 
