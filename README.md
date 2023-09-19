@@ -8,7 +8,7 @@ Crude cli to quickly get champion stats for League, from [League of Graphs](http
 - Simply pass your desired champion and lane to the script. Your browser will open and snap to your champion's build
 - Common champion nicknames supported, with fuzzy matching fallback
 
-[^1] This is tongue in cheek, it obviously doesn't take much to load a webpage
+[^1]: This is tongue in cheek, it obviously doesn't take much to load a webpage
 
 ## Installation & Upgrading
 > ⭐ Star the repo if you're interested in me publishing QuickLeeg to PyPi
