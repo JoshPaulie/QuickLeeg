@@ -1,6 +1,8 @@
 # QuickLeeg
 Crude cli to quickly get champion stats for League, from [League of Graphs](https://www.leagueofgraphs.com/) ❤️
 
+<img src="assets/QuickLeeg.gif" alt="Demo gif" width="500" />
+
 ## Features
 - Fastest way to get your league build from League of Graphs (< 1s! 🔥)
 - Simply pass your desired champion and lane to the script. Your browser will open and snap to your champion's build
