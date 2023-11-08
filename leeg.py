@@ -57,6 +57,7 @@ champ_aliases = {
     "tf": "twistedfate",
     "rg": "renata",
     "j4": "jarvaniv",
+    "mf": "missfortune",
 }
 
 
@@ -99,9 +100,7 @@ def validate_lane(lane: str):
             return "support"
         case "aram":
             return lane
-    raise UnknownLane(
-        f"Unknown role/lane: [red]{lane}[/]. Must be top, jungle, middle, adc, support, or aram"
-    )
+    raise UnknownLane(f"Unknown role/lane: [red]{lane}[/]. Must be top, jungle, middle, adc, support, or aram")
 
 
 class UnknownRank(Exception):
