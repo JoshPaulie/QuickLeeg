@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.scripts]
-leeg = "leeg:main"
+leeg = "quick_leeg.leeg:main"
 
 [project.urls]
 Documentation = "https://github.com/joshpaulie/QuickLeeg#readme"
@@ -41,3 +41,6 @@ allow-direct-references = true
 
 [tool.hatch.version]
 path = "__about__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["quick_leeg"]

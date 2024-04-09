@@ -77,7 +77,9 @@ def validate_champ(champ: str):
 
     fuzzy_champ, fuzzy_match_percent = process.extractOne(champ, latest_champs)  # type: ignore 🤮
     fuzzy_champ = fuzzy_champ.lower()
-    rich.print(f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/] ({fuzzy_match_percent}% match)")
+    rich.print(
+        f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/] ({fuzzy_match_percent}% match)"
+    )
     return fuzzy_champ
 
 
@@ -100,7 +102,9 @@ def validate_lane(lane: str):
             return "support"
         case "aram":
             return lane
-    raise UnknownLane(f"Unknown role/lane: [red]{lane}[/]. Must be top, jungle, middle, adc, support, or aram")
+    raise UnknownLane(
+        f"Unknown role/lane: [red]{lane}[/]. Must be top, jungle, middle, adc, support, or aram"
+    )
 
 
 class UnknownRank(Exception):
