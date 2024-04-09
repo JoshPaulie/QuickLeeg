@@ -59,6 +59,13 @@ champ_aliases = {
     "rg": "renata",
     "j4": "jarvaniv",
     "mf": "missfortune",
+    "sol": "aurelionsol",
+    "ali": "alistar",
+    "gp": "gangplank",
+    "wu": "monkeyking",
+    "wukong": "monkeyking",
+    "tk": "tahmkench",
+    "vel": "velkoz",
 }
 
 
