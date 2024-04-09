@@ -28,6 +28,12 @@ leeg aatrox top --rank gold
 leeg fizz aram
 ```
 
+## Config
+### Setting default rank
+```zsh
+export DEFAULT_RANK="diamond"
+```
+
 ## Why does this script exist?
 League of Graphs is easily the superior league build site. Despite this, getting to your favorite champion's stats is one too many clicks for me. You have to
 1) Navigate to League of Graphs

@@ -1,5 +1,6 @@
 #! .venv/bin/python
 import argparse
+import os
 import sys
 import time
 import webbrowser
@@ -136,7 +137,10 @@ def validate_rank(rank: str):
 
 # Main
 def main():
+    # Performance timer
     start_time = time.perf_counter()
+
+    # CLI handling
     parser = argparse.ArgumentParser(prog="leeg", description=description)
     parser.add_argument("champ", type=validate_champ, help="Champion name")
     parser.add_argument("lane", type=validate_lane, help="Lane name or 'ARAM'")
@@ -153,18 +157,32 @@ def main():
     lane = args.lane
     rank = args.rank
 
+    # Base link
     log_link = f"https://www.leagueofgraphs.com/champions/builds/{champ}/{lane}"
 
+    # Get rank from envvar, validate if present
+    environment_rank = os.getenv("DEFAULT_RANK")
+    try:
+        if environment_rank:
+            rank = validate_rank(environment_rank)
+    except UnknownRank as e:
+        rich.print(f"Error occurred: {e}")
+        sys.exit()
+
+    # Add rank if provided
     if rank:
         log_link += f"/{rank}"
 
+    # Add element tag to URL, providing "snapping" to main content
     log_link += "#mainContent"
 
+    # Open link in default browser, provide link incase that fails
     rich.print(f"Opening your [green]{champ}[/] [blue]{lane}[/] build...")
     rich.print(f"Link: [yellow]{log_link}[/]")
     webbrowser.open(log_link)
-    end_time = time.perf_counter()
 
+    # Display performance time, final message
+    end_time = time.perf_counter()
     elapsed_time = f"{end_time - start_time:.3f}"
     rich.print(f"Build opened in your browser, glhf 💪 ([green]{elapsed_time}s[/])")
 
