@@ -40,7 +40,7 @@ max-line-length = 180
 allow-direct-references = true
 
 [tool.hatch.version]
-path = "__about__.py"
+path = "quick_leeg/__about__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["quick_leeg"]
