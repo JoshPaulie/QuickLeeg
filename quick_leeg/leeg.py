@@ -8,7 +8,7 @@ import requests
 import rich
 from thefuzz import process
 
-from __about__ import description, version
+from .__about__ import description, version
 
 
 # Data fetchers
@@ -77,9 +77,7 @@ def validate_champ(champ: str):
 
     fuzzy_champ, fuzzy_match_percent = process.extractOne(champ, latest_champs)  # type: ignore 🤮
     fuzzy_champ = fuzzy_champ.lower()
-    rich.print(
-        f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/] ({fuzzy_match_percent}% match)"
-    )
+    rich.print(f"Fuzzy matched [red]{champ}[/] -> [blue]{fuzzy_champ}[/] ({fuzzy_match_percent}% match)")
     return fuzzy_champ
 
 
