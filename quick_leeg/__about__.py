@@ -1,2 +1,2 @@
-version = "0.0.6"
+version = "0.0.7"
 description = "Crude cli to quickly get champion stats for League, from League of Graphs ❤️"
